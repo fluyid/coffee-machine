@@ -20,6 +20,11 @@ def low_resource(resource):
     print("Here is your refund")
 
 
+def print_report():
+    print(f"Water: {resources["water"]}ml")
+    print(f"M")
+
+
 def prepare_espresso():
     checking()
     if resources["water"] >= 50 and resources["coffee"] >= 18:
@@ -79,10 +84,17 @@ def prepare_coffee(coffee):
     elif coffee == "cappuccino":
         prepare_cappuccino()
     else:
-        print("Sorry we dont currently serve {coffee}. In case you choose the right coffee, make sure there is no typo")
+        print(f"Sorry we dont currently serve {coffee}. In case you choose the right coffee, make sure there is no typo")
 
 
-input_coffee = input("What kind of coffee would you like? We only know how to make Cappuccino, Espresso and Latte? \n").lower()
-prepare_coffee(input_coffee)
 
 
+coffee_machine_status = "on"
+
+while coffee_machine_status == "on":
+    input_coffee = input("What kind of coffee would you like? We currently have Cappuccino, Espresso and Latte? \n").lower()
+    if input_coffee == "off":
+        coffee_machine_status = "off"
+    else:
+        prepare_coffee(input_coffee)
+        time.sleep(3)
